@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elaichi — Coffee & Kitchen, Fort Kochi</title>
+<meta name="description" content="Step inside Elaichi, a cardamom-green café in Fort Kochi. Look around, walk up to the counter, read the menu boards and see what is in the display.">
+<!-- Demo for a café that does not exist: keep it out of search results. Remove this line for a real client. -->
+<meta name="robots" content="noindex">
+<meta property="og:title" content="Elaichi — Coffee & Kitchen">
+<meta property="og:description" content="Step inside, look around and walk up to the counter.">
+<meta property="og:image" content="assets/og.jpg">
+<meta name="theme-color" content="#13281f">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preload" as="image" href="assets/pano/pano-01-small.jpg" fetchpriority="high">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Jost:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/tour.css">
+</head>
+<body class="is-loading">
+
+<noscript><img src="assets/hero.jpg" alt="The counter at Elaichi" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover"></noscript>
+
+<div class="intro" id="intro" aria-hidden="true">
+  <p class="intro-name">Elaichi</p>
+  <p class="intro-sub">Coffee &amp; Kitchen</p>
+</div>
+
+<header class="top" id="top">
+  <button class="wordmark" type="button" data-open="panel:about">
+    <span class="wordmark-name">Elaichi</span>
+    <span class="wordmark-sub">Coffee &amp; Kitchen</span>
+  </button>
+  <nav class="top-nav" aria-label="About the café">
+    <button type="button" data-open="panel:reviews">Reviews</button>
+    <button type="button" data-open="panel:about">About us</button>
+    <button type="button" data-open="panel:contact">Contact</button>
+  </nav>
+</header>
+
+<main class="room" id="room">
+  <h1 class="sr-only">Elaichi, Coffee and Kitchen</h1>
+  <canvas class="gl" id="gl" role="img" aria-label="Inside Elaichi. Drag to look around."></canvas>
+  <img class="flat" id="flat" data-src="assets/hero.jpg" alt="The counter at Elaichi: five menu boards on a sage-green wall, an espresso machine, and a glass display of sandwiches, wraps and cakes." decoding="async">
+  <div class="pins" id="pins"></div>
+  <div class="vignette" aria-hidden="true"></div>
+</main>
+
+<nav class="places" id="places" aria-label="Where to stand"></nav>
+<p class="hint" id="hint"></p>
+<p class="fineprint">A concept site by Team Sapphire. Elaichi is not a real café; the menu, prices and reviews are samples. <button type="button" data-open="panel:credits">Credits</button></p>
+
+<div class="layer" id="layer" hidden>
+  <div class="veil" id="veil"></div>
+  <section class="card board" id="board" role="dialog" aria-modal="true" aria-labelledby="board-title" hidden></section>
+  <section class="card ticket" id="ticket" role="dialog" aria-modal="true" aria-labelledby="ticket-title" hidden></section>
+  <section class="card panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panel-title" hidden></section>
+  <section class="dish" id="dish" role="dialog" aria-modal="true" aria-labelledby="dish-title" hidden></section>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/tour.js"></script>
+<script src="js/pano.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
