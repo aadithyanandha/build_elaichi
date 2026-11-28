@@ -134,11 +134,11 @@ window.ELAICHI = {
       rows: [
         ["Where", "Fort Kochi, Kerala"],
         ["Open", "Every day, 8 am to 11 pm"],
-        ["Phone", "+91 484 000 0000"],
-        ["Instagram", "@elaichi.kochi"]
+        ["Email", "mailfromaadithya@gmail.com"]
       ],
-      action: "Message us on WhatsApp",
-      actionNote: "This is a demo site, so the button is not connected yet."
+      email: "mailfromaadithya@gmail.com",
+      action: "Write to us",
+      actionNote: "Opens a new email in your mail app."
     },
     reviews: {
       skin: "walnut", title: "Reviews",

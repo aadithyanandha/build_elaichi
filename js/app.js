@@ -368,8 +368,11 @@
   function openPanel(id, fromEl) {
     const p = D.panels[id], node = nodes.panel;
     let inner = '<h2 class="panel-title" id="panel-title">' + esc(p.title) + '</h2>';
-    if (p.rows) inner += '<dl class="rows">' + p.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + esc(r[1]) + '</dd></div>').join('') + '</dl>';
-    if (p.action) inner += '<button type="button" class="action" data-note="' + esc(p.actionNote) + '">' + esc(p.action) + '</button><p class="action-note" role="status"></p>';
+    const mailto = (m) => 'mailto:' + esc(m) + '?subject=' + encodeURIComponent('Hello Elaichi');
+    if (p.rows) inner += '<dl class="rows">' + p.rows.map((r) => '<div><dt>' + esc(r[0]) + '</dt><dd>' + (r[0] === 'Email' ? '<a href="' + mailto(r[1]) + '">' + esc(r[1]) + '</a>' : esc(r[1])) + '</dd></div>').join('') + '</dl>';
+    if (p.action && p.email) inner += '<a class="action" href="' + mailto(p.email) + '">' + esc(p.action) + '</a>' +
+      '<button type="button" class="copy-mail" data-mail="' + esc(p.email) + '">Copy email address</button><p class="action-note" role="status"></p>';
+    else if (p.action) inner += '<button type="button" class="action" data-note="' + esc(p.actionNote) + '">' + esc(p.action) + '</button><p class="action-note" role="status"></p>';
     if (p.summary) inner += '<p class="score"><span class="star" aria-hidden="true">★</span>' + p.summary.rating + ' out of 5, from ' + p.summary.count + ' visitors</p>';
     if (p.quotes) inner += '<div class="quotes">' + p.quotes.map(quote).join('') + '</div>';
     if (p.body) inner += '<div class="prose">' + p.body.map((t) => '<p>' + esc(t) + '</p>').join('') + '</div>';
@@ -498,7 +501,15 @@
     if (item) { openItem(nodes.board.dataset.board, +item.dataset.item, item); return; }
     const sw = t.closest('[data-dish]');
     if (sw) { swapDish(sw.dataset.dish); return; }
+    const cp = t.closest('.copy-mail');
+    if (cp) {
+      const note = cp.nextElementSibling, done = () => { note.textContent = 'Copied: ' + cp.dataset.mail; };
+      if (navigator.clipboard) navigator.clipboard.writeText(cp.dataset.mail).then(done, () => { note.textContent = cp.dataset.mail; });
+      else note.textContent = cp.dataset.mail;
+      return;
+    }
     const act = t.closest('.action');
+    if (act && act.tagName === 'A') return;                    // a real mailto link: let the browser open the mail app
     if (act) { act.nextElementSibling.textContent = act.dataset.note; return; }
     if (justDragged) return;
     const go = t.closest('[data-go]');
